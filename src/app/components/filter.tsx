@@ -4,6 +4,11 @@ const Filter:React.FC = () => {
     const [voteSort, setVoteSort] = useState('false')
     const [dateSort, setDateSort] = useState('false')
 
+    const reset = () => {
+        setVoteSort('false')
+        setDateSort('false')
+    }
+
     // need to send a lil query here y'allll
     const sortByVotes = () => {
         if(voteSort == 'asc'){
@@ -38,6 +43,9 @@ const Filter:React.FC = () => {
                     Date
                     {dateSort == 'desc' &&  <img src="/up-arrow.svg" width="20px"/>}
                     {dateSort == 'asc' &&  <img src="/down-arrow.svg" width="20px"/>}
+                </button>
+                <button onClick={reset}>
+                    Reset
                 </button>
             </div>
             <style jsx>{`
