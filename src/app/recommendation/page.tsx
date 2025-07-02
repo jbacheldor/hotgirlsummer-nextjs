@@ -19,14 +19,26 @@ const Page:React.FC = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            justify-content: space-around;
             }
             #rec-body-main p {
-            /* text-align: center; */
+                text-align: center;
+                margin: 0 30px;
+                color: white;
+                z-index: 10;
+            }
+            #rec-body-main button {
+                display: flex;
+                align-self: flex-end;
+                margin: 10px;
             }
 
             #the-meat {
             display: flex;
             flex-direction: row;
+            width: 100%;
+            justify-content: space-evenly;
             }
 
         `}

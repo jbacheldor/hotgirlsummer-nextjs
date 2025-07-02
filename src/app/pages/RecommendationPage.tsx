@@ -18,14 +18,24 @@ const RecommendationPage:React.FC = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            justify-content: space-evenly;
             }
             #rec-body-main p {
             /* text-align: center; */
+            }
+            #rec-body-main button {
+                position: relative;
+                bottom: 10%;
+                right: 10%;
+                margin: 10px;
             }
 
             #the-meat {
             display: flex;
             flex-direction: row;
+            width: 100%;
+            justify-content: space-evenly;
             }
 
         `}
