@@ -1,10 +1,20 @@
 import Filter from "../components/filter"
 import Rec from "./rec"
 import SearchBox from "./searchbox"
+import { RecommendationType } from "../types/recommendations"
+import { useEffect, useState } from "react"
+
 
 const Recommendations:React.FC = () => {
+    let [data, setData] = useState<RecommendationType[]>()
 
-    let i = 0
+    useEffect(() => {
+        fetch('')
+        .then(response => response.json())
+        .then(data => setData(data))
+        .catch(e => {throw new Error ('womp womp womp, she is broke')})
+    }, [])
+
     return (
         <div id="recommendation-block">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
@@ -12,6 +22,13 @@ const Recommendations:React.FC = () => {
         <SearchBox/>
         <Filter/>
         <div>
+            {data && data.map((i,key) => {
+                return (
+                    <div key={key}>
+                        <Rec vote={i.votes}/>
+                    </div>
+                )
+            })}
             { Array.from({ length: 20 }).map((i, key)=> {
                 return (
                     <div key={key}>

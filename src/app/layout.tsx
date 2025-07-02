@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import {font} from "../../public/fonts/BitcountGridDouble-Regular.ttf"
 import "./globals.css";
 
 const geistSans = Geist({
