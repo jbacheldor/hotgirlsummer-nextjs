@@ -32,6 +32,8 @@ const Page:React.FC = () => {
                 display: flex;
                 align-self: flex-end;
                 margin: 10px;
+                z-index: 5;
+                margin-right: 30px;
             }
 
             #the-meat {

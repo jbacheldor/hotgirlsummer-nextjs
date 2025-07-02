@@ -1,4 +1,4 @@
-
+import MapView from "./map"
 
 const Submission:React.FC = () => {
     return (
@@ -8,10 +8,11 @@ const Submission:React.FC = () => {
         <h1>Submit Yours</h1>
         <p>title</p>
         <input/>
-        <p>subject</p>
-        <input/>
+        <p>description</p>
+        <textarea/>
         <p>location</p>
         <input/>
+        <MapView/>
         <button>submit</button>
 
         <style jsx>{`
@@ -38,7 +39,8 @@ const Submission:React.FC = () => {
             bottom: 5px;
             right: 5px;
         }
-        input {
+        
+        input, textarea {
             width: 100%;
             padding: 3px;
         }
