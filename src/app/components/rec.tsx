@@ -1,7 +1,23 @@
+import { useState } from 'react';
 
-const Rec:React.FC = () => {
+type Props = {
+    vote : number;
+    title?: string;
+    description?: string;
+    location?: string;
+}
 
-    let count = 0
+const Rec:React.FC<Props> = ({vote}) => {
+    const [count, setCount] = useState(0)
+
+    const increaseCount = () => {
+        if(vote+1 != count) setCount(count+1)
+    }
+
+    const decreaseCount = () => {
+        if(vote-1 != count) setCount(count-1)
+    }
+
     return (
         <div className="rec-body">
         <div className="rec-left">
@@ -11,11 +27,11 @@ const Rec:React.FC = () => {
         <div className="rec-right">
             <p>1 day ago</p>
             <div className="counts">
-                <button >
+                <button onClick={increaseCount}>
                     <img src="/up-arrow.svg" width="20px" height="20px"/>
                 </button>
                 <p>{count}</p>
-                <button>
+                <button onClick={decreaseCount}>
                     <img src="/down-arrow.svg" width="20px" height="20px"/>
                 </button>
             </div>
@@ -80,7 +96,7 @@ const Rec:React.FC = () => {
         }
         .counts p {
             padding: 0 5px;
-            width: 20px;
+            width: 30px;
             text-align: center;
         }`}            
         </style>

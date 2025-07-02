@@ -8,23 +8,6 @@ const Recommendations:React.FC = () => {
     return (
         <div id="recommendation-block">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
-        <svg width="0" height="0" id="glow__svg_">
-              <filter
-                id="glow"
-            >
-                <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation="10"
-                result="glow__svg__blur"
-                id="glow__svg__res"
-                />
-                <feBlend
-                mode="lighten"
-                in="SourceGraphic"
-                in2="glow__svg__blur"
-                />
-  </filter>
-        </svg>
         <h1>Current Recommendations</h1>
         <SearchBox/>
         <Filter/>
@@ -32,7 +15,7 @@ const Recommendations:React.FC = () => {
             { Array.from({ length: 20 }).map((i, key)=> {
                 return (
                     <div key={key}>
-                        <Rec/>
+                        <Rec vote={0}/>
                     </div>
                 )
             })}
@@ -46,7 +29,6 @@ const Recommendations:React.FC = () => {
             filter: blur(.8px);
         }
         #recommendation-block {
-            z-index: 5; 
             background-color: #97A98B;
             padding: 10px;
             border-radius: 10px;
@@ -57,10 +39,11 @@ const Recommendations:React.FC = () => {
             overflow-y: scroll;
             max-height: 500px;
             box-shadow:
-            0 0 60px 10px #fff,  /* inner white */
-            0 0 100px 20px #f0f, /* middle magenta */
-            0 0 140px 30px #0ff; /* outer cyan */
+            0 0 30px 10px #fff,  /* inner white */
+            0 0 50px 20px #f0f, /* middle magenta */
+            0 0 70px 30px #0ff; /* outer cyan */
             border: solid white 3px;
+            margin-left: 20px;
         } `}
     </style>
     </div>
