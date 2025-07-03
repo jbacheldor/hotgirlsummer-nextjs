@@ -21,7 +21,7 @@ const Recommendations:React.FC = () => {
         <h1>Current Recommendations</h1>
         <SearchBox/>
         <Filter/>
-        <div>
+        <div id="recommendations-block">
             {data && data.map((i,key) => {
                 return (
                     <div key={key}>
@@ -39,11 +39,15 @@ const Recommendations:React.FC = () => {
         </div>
 
     <style jsx>{`
+        #recommendations-block {
+            overflow-y: scroll;
+            max-height: 300px;
+        }
         #zest {
             position: absolute;
             left: -10px;
             top: -10px;
-            filter: blur(.8px);
+            filter: blur(.2px);
         }
         #recommendation-block {
             background-color: #97A98B;
@@ -53,7 +57,6 @@ const Recommendations:React.FC = () => {
             position: relative;
             flex-direction: column;
             align-items: center;
-            overflow-y: scroll;
             max-height: 500px;
             box-shadow:
             0 0 30px 10px #fff,  /* inner white */
