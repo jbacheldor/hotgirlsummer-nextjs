@@ -1,8 +1,12 @@
 'use client'
+import Link from "next/link"
 import Recommendations from "../components/recommendations"
 import Submissions from "../components/submissions"
+// import { useRouter } from 'next/router'
 
 const Page:React.FC = () => {
+    // const router = useRouter()
+
     return (
         <div id="rec-body-main">
             <h1>What Should I Do?</h1>
@@ -11,7 +15,8 @@ const Page:React.FC = () => {
             <Recommendations/>
             <Submissions/>
             </div>
-            <button>View Previous Weeks!</button>
+            <button><Link href="/calendar">View Previous Weeks!</Link>
+                </button>
 
         <style jsx>{`
         
