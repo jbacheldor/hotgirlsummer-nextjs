@@ -6,6 +6,7 @@ type UrlStuff = {params: Promise<{
 const PreviousActivityPage:React.FC<UrlStuff> = async ({params}) => {
     const { slug } = await params
     console.log('slug', slug)
+    // fetch the query with 
 
     return (
         <div>
