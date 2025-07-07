@@ -1,28 +1,35 @@
 import { useState } from 'react';
+import { RecommendationType } from "../types/recommendations"
 
 type Props = {
-    vote : number;
-    title?: string;
-    description?: string;
-    location?: string;
+  rec: RecommendationType
 }
 
-const Rec:React.FC<Props> = ({vote}) => {
-    const [count, setCount] = useState(0)
+const Rec:React.FC<Props> = ({rec}) => {
+    const {votes, title, description, location, created_at: date} = rec
+    const [count, setCount] = useState(votes)
 
     const increaseCount = () => {
-        if(vote+1 != count) setCount(count+1)
+        if(votes+1 != count) setCount(count+1)
     }
 
     const decreaseCount = () => {
-        if(vote-1 != count) setCount(count-1)
+        if(votes-1 != count) setCount(count-1)
     }
+
+    const calculateDate = () => {
+        var today = new Date();
+        // want to do a situation where i take current date
+        // and subtract from existing date
+    }
+
+    console.log('date', date)
 
     return (
         <div className="rec-body">
         <div className="rec-left">
-            <p className="title">title</p>
-            <p className="rec-body-paragraph">lorum ipsum girly pop lorum lorum lorum</p>
+            <p className="title">{title ? title : 'title'}</p>
+            <p className="rec-body-paragraph">{description ? description : '---'}</p>
         </div>
         <div className="rec-right">
             <p>1 day ago</p>
@@ -45,6 +52,7 @@ const Rec:React.FC<Props> = ({vote}) => {
             padding: 7px;
             border-radius: 5px;
             display: flex;
+            justify-content: space-between;
             flex-direction: row;
             text-align: end;
         }

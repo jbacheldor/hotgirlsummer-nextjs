@@ -21,11 +21,11 @@ const Page:React.FC = () => {
         <style jsx>{`
         
             #rec-body-main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-            justify-content: space-around;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 100%;
+                justify-content: space-around;
             }
             #rec-body-main p {
                 text-align: center;

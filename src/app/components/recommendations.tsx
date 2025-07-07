@@ -6,13 +6,32 @@ import { useEffect, useState } from "react"
 
 
 const Recommendations:React.FC = () => {
+    const pathName = process.env.BASE_URL
     let [data, setData] = useState<RecommendationType[]>()
 
     useEffect(() => {
-        fetch('')
-        .then(response => response.json())
-        .then(data => setData(data))
-        .catch(e => {throw new Error ('womp womp womp, she is broke')})
+        const fetchData = async () => {
+            try {
+                await fetch(`${pathName}/server/getrecommendations`, {
+                    method: 'GET'
+                })
+                .then((response)=> {
+                    return response.json()
+                })
+                .then(data => {
+                    setData(data.data as RecommendationType[])
+                })
+                .catch(e => {throw new Error ('womp womp womp, she is broke')})
+            }catch(e){
+                console.log('Error fetching data:', e)
+            }
+        }
+
+        fetchData();
+
+        return () => {
+            console.log('Component unmounted or effect re-ran');
+        };
     }, [])
 
     return (
@@ -25,17 +44,17 @@ const Recommendations:React.FC = () => {
             {data && data.map((i,key) => {
                 return (
                     <div key={key}>
-                        <Rec vote={i.votes}/>
+                        <Rec rec={i}/>
                     </div>
                 )
             })}
-            { Array.from({ length: 20 }).map((i, key)=> {
+            {/* { Array.from({ length: 20 }).map((i, key)=> {
                 return (
                     <div key={key}>
                         <Rec vote={0}/>
                     </div>
                 )
-            })}
+            })} */}
         </div>
 
     <style jsx>{`

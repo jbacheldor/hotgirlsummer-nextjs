@@ -2,7 +2,8 @@ export type RecommendationType = {
     title: string,
     votes: number, 
     description: string,
-    location: string
+    location: string,
+    created_at: string,
 }
 
 export type RecommendationsType = {
