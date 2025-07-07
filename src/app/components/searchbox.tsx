@@ -1,11 +1,24 @@
+import { useState } from "react"
 
 
 const SearchBox:React.FC = () => {
+    const [searchString, setSearchString] = useState('')
+
+    const updateSearchString = (e: any) => {
+        setSearchString(e.target.value)
+    }
+    
+
+    // on this we can do client search or regex or whatever 
+    const searchQuery = () => {
+        // do we need to search just title, or description, or all values
+        console.log(searchString)
+    }
 
     return (
         <div id="search-box">
-            <input placeholder="Search Here"/>
-            <button>Search</button>
+            <input placeholder="Search Here" value={searchString} onChange={(e)=> {updateSearchString(e)}}/>
+            <button onClick={searchQuery}>Search</button>
 
             <style jsx>{`
             #search-box {

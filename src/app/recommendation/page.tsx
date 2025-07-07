@@ -1,8 +1,12 @@
 'use client'
+import Link from "next/link"
 import Recommendations from "../components/recommendations"
 import Submissions from "../components/submissions"
+// import { useRouter } from 'next/router'
 
 const Page:React.FC = () => {
+    // const router = useRouter()
+
     return (
         <div id="rec-body-main">
             <h1>What Should I Do?</h1>
@@ -11,7 +15,8 @@ const Page:React.FC = () => {
             <Recommendations/>
             <Submissions/>
             </div>
-            <button>View Previous Weeks!</button>
+            <button><Link href="/calendar">View Previous Weeks!</Link>
+                </button>
 
         <style jsx>{`
         
@@ -19,14 +24,28 @@ const Page:React.FC = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            justify-content: space-around;
             }
             #rec-body-main p {
-            /* text-align: center; */
+                text-align: center;
+                margin: 0 30px;
+                color: white;
+                z-index: 10;
+            }
+            #rec-body-main button {
+                display: flex;
+                align-self: flex-end;
+                margin: 10px;
+                z-index: 5;
+                margin-right: 30px;
             }
 
             #the-meat {
             display: flex;
             flex-direction: row;
+            width: 100%;
+            justify-content: space-evenly;
             }
 
         `}

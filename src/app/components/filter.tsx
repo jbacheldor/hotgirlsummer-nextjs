@@ -1,19 +1,51 @@
+import { useState } from "react"
 
 const Filter:React.FC = () => {
+    const [voteSort, setVoteSort] = useState('false')
+    const [dateSort, setDateSort] = useState('false')
+
+    const reset = () => {
+        setVoteSort('false')
+        setDateSort('false')
+    }
+
+    // need to send a lil query here y'allll
+    const sortByVotes = () => {
+        if(voteSort == 'asc'){
+            setVoteSort('desc')
+        }
+        else {
+            setVoteSort('asc')
+        }
+        setDateSort('false')
+    }
+
+    const sortByDate = () => {
+        if(dateSort == 'asc'){
+            setDateSort('desc')
+        }
+        else {
+            setDateSort('asc')
+        }
+        setVoteSort('false')
+    }
 
     return (
         <div>
             <div id="filter-box">
                 Sort By:
-                <button >
+                <button onClick={sortByVotes}>
                     Votes
-                    <img src="/up-arrow.svg" width="20px"/>
-                    <img  src="/down-arrow.svg" width="20px"/>
+                    {voteSort == 'desc' &&  <img src="/up-arrow.svg" width="20px"/>}
+                    {voteSort == 'asc' &&  <img src="/down-arrow.svg" width="20px"/>}
                 </button>
-                <button >
+                <button onClick={sortByDate}>
                     Date
-                    <img src="/up-arrow.svg" width="20px"/>
-                    <img  src="/down-arrow.svg" width="20px"/>
+                    {dateSort == 'desc' &&  <img src="/up-arrow.svg" width="20px"/>}
+                    {dateSort == 'asc' &&  <img src="/down-arrow.svg" width="20px"/>}
+                </button>
+                <button onClick={reset}>
+                    Reset
                 </button>
             </div>
             <style jsx>{`
