@@ -8,22 +8,25 @@ type Props = {
 
 const Activity:React.FC<Props> = ({slug}) => {
     const pathName = process.env.BASE_URL
+    console.log('pathname', pathName)
     const [activityData, setActivityData] = useState<prevActivityType>()
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const getData = async () => {
     try{
-        await fetch(`${pathName}/server/getActivity/` + new URLSearchParams({
-            id: slug,
-            }).toString(), {
-                method: 'GET',
-            })
-            .then((data)=>{
-                // this is bad, but i need to leave my house, so i'm going to push it anyways
-                setActivityData(data.json as any as prevActivityType);
-            }).catch(e=> {
-                throw new Error('error during call', e)
-            })
+        console.log('womp womp')
+        // await fetch(`${pathName}/server/getActivity/` + new URLSearchParams({
+        //     id: slug,
+        //     }).toString(), {
+        //         method: 'GET',
+        //     })
+        //     .then((data)=>{
+        //         // this is bad, but i need to leave my house, so i'm going to push it anyways
+        //         setActivityData(data.json as any as prevActivityType);
+                    // setIsLoading(false)
+        //     }).catch(e=> {
+        //         throw new Error('error during call', e)
+        //     })
     }catch(e){
         throw new Error('can not return previous activity')
     }
@@ -44,7 +47,7 @@ const Activity:React.FC<Props> = ({slug}) => {
                 no loading & data mama mia!!
             </div>
                 }
-            HELLOOOOOO
+            non-loading part: {slug}
         </div>
     )
 
