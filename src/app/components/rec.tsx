@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RecommendationType } from "../types/recommendations"
 
 type Props = {
@@ -23,7 +23,9 @@ const Rec:React.FC<Props> = ({rec}) => {
         // and subtract from existing date
     }
 
-    console.log('date', date)
+    useEffect(()=> {
+        setCount(votes)
+    }, [])
 
     return (
         <div className="rec-body">
@@ -32,12 +34,12 @@ const Rec:React.FC<Props> = ({rec}) => {
             <p className="rec-body-paragraph">{description ? description : '---'}</p>
         </div>
         <div className="rec-right">
-            <p>1 day ago</p>
+            <p>{date}</p>
             <div className="counts">
                 <button onClick={increaseCount}>
                     <img src="/up-arrow.svg" width="20px" height="20px"/>
                 </button>
-                <p>{count}</p>
+                <p>{votes}</p>
                 <button onClick={decreaseCount}>
                     <img src="/down-arrow.svg" width="20px" height="20px"/>
                 </button>

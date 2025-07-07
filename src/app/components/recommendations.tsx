@@ -7,7 +7,44 @@ import { useEffect, useState } from "react"
 
 const Recommendations:React.FC = () => {
     const pathName = process.env.BASE_URL
-    let [data, setData] = useState<RecommendationType[]>()
+    let [data, setData] = useState<RecommendationType[]>([])
+
+    const dataSort = (value: string) => {
+        switch(value){
+            case 'votes_desc':
+                var newData = [...data];
+                newData?.sort((a, b) =>{
+                    return  b.votes - a.votes
+                })
+                console.log('newww', newData)
+                setData(newData)
+                break;
+            case 'votes_asc':
+                var newData = [...data];
+                newData?.sort((a, b) =>{
+                    return  a.votes - b.votes
+                })
+                console.log('new data', newData)
+                setData(newData)
+                break;
+            case 'dates_desc':
+                var newData = [...data];
+                newData?.sort((a,b) => {
+                    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                })
+                console.log(newData)
+                setData(newData)
+                break;
+            case 'dates_asc':
+                var newData = [...data];
+                newData?.sort((a,b) => {
+                    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+                })
+                console.log(newData)
+                setData(newData)
+                break;
+        }
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,7 +76,7 @@ const Recommendations:React.FC = () => {
         <img id="zest" src="/bullet_point.svg" height="50px"/>
         <h1>Current Recommendations</h1>
         <SearchBox/>
-        <Filter/>
+        <Filter dataSort={dataSort}/>
         <div id="recommendations-block">
             {data && data.map((i,key) => {
                 return (
@@ -48,13 +85,6 @@ const Recommendations:React.FC = () => {
                     </div>
                 )
             })}
-            {/* { Array.from({ length: 20 }).map((i, key)=> {
-                return (
-                    <div key={key}>
-                        <Rec vote={0}/>
-                    </div>
-                )
-            })} */}
         </div>
 
     <style jsx>{`

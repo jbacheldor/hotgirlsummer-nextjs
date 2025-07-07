@@ -1,21 +1,32 @@
 import { useState } from "react"
 
-const Filter:React.FC = () => {
+type Props = {
+    dataSort: (value: string) => void
+}
+
+const Filter:React.FC<Props> = (Props) => {
+    const {dataSort} = Props
+
     const [voteSort, setVoteSort] = useState('false')
     const [dateSort, setDateSort] = useState('false')
 
     const reset = () => {
         setVoteSort('false')
         setDateSort('false')
+
+        // resets back to original value
+        dataSort('votes_desc')
     }
 
     // need to send a lil query here y'allll
     const sortByVotes = () => {
         if(voteSort == 'asc'){
             setVoteSort('desc')
+            dataSort('votes_desc')
         }
         else {
             setVoteSort('asc')
+            dataSort('votes_asc')
         }
         setDateSort('false')
     }
@@ -23,9 +34,11 @@ const Filter:React.FC = () => {
     const sortByDate = () => {
         if(dateSort == 'asc'){
             setDateSort('desc')
+            dataSort('date_asc')
         }
         else {
             setDateSort('asc')
+            dataSort('date_asc')
         }
         setVoteSort('false')
     }
