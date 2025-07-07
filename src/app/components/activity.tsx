@@ -8,7 +8,6 @@ type Props = {
 
 const Activity:React.FC<Props> = ({slug}) => {
     const pathName = process.env.BASE_URL
-    console.log('pathname', pathName)
     const [activityData, setActivityData] = useState<prevActivityType>()
     const [isLoading, setIsLoading] = useState(true)
 
