@@ -81,7 +81,7 @@ const Rec:React.FC<Props> = ({rec}) => {
             flex-direction: column;
             text-align: left;
             text-overflow: ellipsis;
-            max-width: 50ch;
+            max-width: 40ch;
             margin-right: 10px;
         }
         .rec-right {
@@ -95,6 +95,7 @@ const Rec:React.FC<Props> = ({rec}) => {
         .rec-right p {
             text-align: right;
             margin: 0;
+            width: 100%;
         }
 
         .title {

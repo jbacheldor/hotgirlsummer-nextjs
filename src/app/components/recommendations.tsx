@@ -8,7 +8,9 @@ import { useEffect, useState } from "react"
 const Recommendations:React.FC = () => {
     const pathName = process.env.BASE_URL
     let [data, setData] = useState<RecommendationType[]>([])
+    let [searchData, setSearchData] = useState<RecommendationType[]>([])
 
+    
     const dataSort = (value: string) => {
         switch(value){
             case 'votes_desc':
@@ -67,16 +69,46 @@ const Recommendations:React.FC = () => {
         };
     }, [])
 
+    // do a little regular expression girl
+    const queryData = (value: string) => {
+        const queryData: RecommendationType[] = []
+        data.forEach((i)=> {
+
+            var regex = new RegExp("(" + value + ")", "i");
+            console.log("regex", regex)
+
+            var title = regex.test(i.title)
+            var des = regex.test(i.description)
+
+            // if either has a string found we add it in
+            if(des == true || title == true){
+                queryData.push(i)
+            }
+        })
+        setSearchData(queryData)
+    }
+
+    const resetSearch = () => {
+        setSearchData([])
+    }
+
     return (
         <div id="recommendation-block">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
         <h1>Current Recommendations</h1>
-        <SearchBox/>
+        <SearchBox resetQuery={resetSearch} queryData={queryData}/>
         <Filter dataSort={dataSort}/>
         <div id="recommendations-block">
-            {data && data.map((i,key) => {
+            {searchData && searchData.map((i, key)=> {
                 return (
-                    <div key={key}>
+                    <div key={`search-data-${key}`}>
+                        <Rec rec={i}/>
+                    </div>
+                )
+            })}
+            {searchData.length != 1 && data && data.map((i,key) => {
+                return (
+                    <div key={`data-${key}`}>
                         <Rec rec={i}/>
                     </div>
                 )
