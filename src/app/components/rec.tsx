@@ -18,12 +18,12 @@ const Rec:React.FC<Props> = ({rec}) => {
     }
 
     const calculateDate = () => {
-        let test = new Date(date)
-        const formattedDate = `${test.getDate()}-${test.getMonth() + 1}-${test.getFullYear()}`
+        let submit_date = new Date(date)
+        const formattedDate = `${submit_date.getDate()}-${submit_date.getMonth() + 1}-${submit_date.getFullYear()}`
 
         let today  = new Date();
 
-        let diffTime = Math.abs(test - today);
+        let diffTime = Math.abs(submit_date - today);
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
 
         if(diffDays < 1){
@@ -36,14 +36,12 @@ const Rec:React.FC<Props> = ({rec}) => {
             }
         }
 
-
-        // want to do a situation where i take current date
-        // and subtract from existing date
-        return formattedDate
+        return `${Math.floor(diffTime / 86400000)} days ago` 
+        // return formattedDate
     }
 
     useEffect(()=> {
-        // calculateDate()
+       
     }, [])
 
     return (

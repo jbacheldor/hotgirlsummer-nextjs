@@ -16,7 +16,6 @@ const Recommendations:React.FC = () => {
                 newData?.sort((a, b) =>{
                     return  b.votes - a.votes
                 })
-                console.log('newww', newData)
                 setData(newData)
                 break;
             case 'votes_asc':
@@ -24,7 +23,6 @@ const Recommendations:React.FC = () => {
                 newData?.sort((a, b) =>{
                     return  a.votes - b.votes
                 })
-                console.log('new data', newData)
                 setData(newData)
                 break;
             case 'dates_desc':
@@ -32,7 +30,6 @@ const Recommendations:React.FC = () => {
                 newData?.sort((a,b) => {
                     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
                 })
-                console.log(newData)
                 setData(newData)
                 break;
             case 'dates_asc':
@@ -40,7 +37,6 @@ const Recommendations:React.FC = () => {
                 newData?.sort((a,b) => {
                     return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
                 })
-                console.log(newData)
                 setData(newData)
                 break;
         }

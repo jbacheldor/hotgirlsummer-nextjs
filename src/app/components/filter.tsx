@@ -34,11 +34,11 @@ const Filter:React.FC<Props> = (Props) => {
     const sortByDate = () => {
         if(dateSort == 'asc'){
             setDateSort('desc')
-            dataSort('date_asc')
+            dataSort('dates_desc')
         }
         else {
             setDateSort('asc')
-            dataSort('date_asc')
+            dataSort('dates_asc')
         }
         setVoteSort('false')
     }
