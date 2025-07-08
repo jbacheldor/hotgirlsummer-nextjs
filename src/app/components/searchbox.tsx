@@ -17,7 +17,7 @@ const SearchBox:React.FC<Props> = ({resetQuery, queryData}) => {
         <div id="search-box">
             <input placeholder="Search Here" value={searchString} onChange={(e)=> {updateSearchString(e)}}/>
             <button onClick={() => queryData(searchString)}>Search</button>
-            <button onClick={resetQuery}>Reset</button>
+            <button onClick={resetQuery}>Clear</button>
 
             <style jsx>{`
             #search-box {

@@ -9,8 +9,8 @@ const Recommendations:React.FC = () => {
     const pathName = process.env.BASE_URL
     let [data, setData] = useState<RecommendationType[]>([])
     let [searchData, setSearchData] = useState<RecommendationType[]>([])
+    const [searchError, setSearchError] = useState(false)
 
-    
     const dataSort = (value: string) => {
         switch(value){
             case 'votes_desc':
@@ -85,11 +85,18 @@ const Recommendations:React.FC = () => {
                 queryData.push(i)
             }
         })
-        setSearchData(queryData)
+        if(queryData.length == 0){
+            setSearchError(true)
+        }
+        else {
+            setSearchError(false)
+            setSearchData(queryData)
+        }
     }
 
     const resetSearch = () => {
         setSearchData([])
+        setSearchError(false)
     }
 
     return (
@@ -99,7 +106,12 @@ const Recommendations:React.FC = () => {
         <SearchBox resetQuery={resetSearch} queryData={queryData}/>
         <Filter dataSort={dataSort}/>
         <div id="recommendations-block">
-            {searchData && searchData.map((i, key)=> {
+            {searchError &&
+                <div id="search-error-message">
+                    No search found :(
+                </div>
+            }
+            {!searchError && searchData && searchData.map((i, key)=> {
                 return (
                     <div key={`search-data-${key}`}>
                         <Rec rec={i}/>
@@ -116,6 +128,10 @@ const Recommendations:React.FC = () => {
         </div>
 
     <style jsx>{`
+        #search-error-message {
+            text-align: center;
+            margin: 10px 0;
+        }
         #recommendations-block {
             overflow-y: scroll;
             max-height: 300px;
