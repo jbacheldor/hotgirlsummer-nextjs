@@ -18,13 +18,32 @@ const Rec:React.FC<Props> = ({rec}) => {
     }
 
     const calculateDate = () => {
-        var today = new Date();
+        let test = new Date(date)
+        const formattedDate = `${test.getDate()}-${test.getMonth() + 1}-${test.getFullYear()}`
+
+        let today  = new Date();
+
+        let diffTime = Math.abs(test - today);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+
+        if(diffDays < 1){
+            // see if it's less than an hour 
+            if(diffTime / 3600000 < 1){
+                return `${Math.floor(diffTime / 60000)} minutes ago`
+            }
+            else {
+                return `${Math.floor(diffTime / 3600000)} hours ago`
+            }
+        }
+
+
         // want to do a situation where i take current date
         // and subtract from existing date
+        return formattedDate
     }
 
     useEffect(()=> {
-        setCount(votes)
+        // calculateDate()
     }, [])
 
     return (
@@ -34,7 +53,7 @@ const Rec:React.FC<Props> = ({rec}) => {
             <p className="rec-body-paragraph">{description ? description : '---'}</p>
         </div>
         <div className="rec-right">
-            <p>{date}</p>
+            <p>{calculateDate()}</p>
             <div className="counts">
                 <button onClick={increaseCount}>
                     <img src="/up-arrow.svg" width="20px" height="20px"/>
