@@ -44,7 +44,6 @@ const Filter:React.FC<Props> = (Props) => {
     }
 
     return (
-        <div>
             <div id="filter-box">
                 Sort By:
                 <button onClick={sortByVotes}>
@@ -60,7 +59,6 @@ const Filter:React.FC<Props> = (Props) => {
                 <button onClick={reset}>
                     Reset
                 </button>
-            </div>
             <style jsx>{`
             #filter-box{
                 background: #B7CAAB;
@@ -69,6 +67,7 @@ const Filter:React.FC<Props> = (Props) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                margin-bottom: 10px;
             }
 
             #filter-box button {

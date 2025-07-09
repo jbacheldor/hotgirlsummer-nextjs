@@ -100,6 +100,10 @@ const Recommendations:React.FC = () => {
         setSearchError(false)
     }
 
+    const onChangePage = () => {
+        // change the results distributed 
+    }
+
     return (
         <div id="recommendation-block">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
@@ -127,8 +131,7 @@ const Recommendations:React.FC = () => {
                 )
             })}
         </div>
-        <span>Results: {data.length}</span>
-        <Pagination/>
+        <Pagination results={data.length} onChangePage={onChangePage}/>
 
     <style jsx>{`
         #search-error-message {
