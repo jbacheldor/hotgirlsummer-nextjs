@@ -3,6 +3,7 @@ import Rec from "./rec"
 import SearchBox from "./searchbox"
 import { RecommendationType } from "../types/recommendations"
 import { useEffect, useState } from "react"
+import Pagination from "./pagination"
 
 
 const Recommendations:React.FC = () => {
@@ -105,12 +106,12 @@ const Recommendations:React.FC = () => {
         <h1>Current Recommendations</h1>
         <SearchBox resetQuery={resetSearch} queryData={queryData}/>
         <Filter dataSort={dataSort}/>
-        <div id="recommendations-block">
-            {searchError &&
+        {searchError &&
                 <div id="search-error-message">
                     No search found :(
                 </div>
-            }
+        }
+        <div id="recommendations-block">
             {!searchError && searchData && searchData.map((i, key)=> {
                 return (
                     <div key={`search-data-${key}`}>
@@ -126,6 +127,8 @@ const Recommendations:React.FC = () => {
                 )
             })}
         </div>
+        <span>Results: {data.length}</span>
+        <Pagination/>
 
     <style jsx>{`
         #search-error-message {
@@ -135,6 +138,7 @@ const Recommendations:React.FC = () => {
         #recommendations-block {
             overflow-y: scroll;
             max-height: 300px;
+            width: 100%; 
         }
         #zest {
             position: absolute;

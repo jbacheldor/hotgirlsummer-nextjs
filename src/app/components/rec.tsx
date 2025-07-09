@@ -82,6 +82,7 @@ const Rec:React.FC<Props> = ({rec}) => {
             text-align: left;
             text-overflow: ellipsis;
             max-width: 40ch;
+            min-width: 40ch;
             margin-right: 10px;
         }
         .rec-right {
