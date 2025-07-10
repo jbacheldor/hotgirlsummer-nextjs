@@ -5,29 +5,88 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 
-const Submission:React.FC = () => {
-    const [location, setLocation] = useState('')
+type FormState = {
+    title: string,
+    description: string,
+    location: string
+}
 
-    const updateLocation = (e: any) => {
-        setLocation(e.target.value)
+const initialFormState = {
+    title: '',
+    description: '',
+    location: ''
+}
+
+const Submission:React.FC = () => {
+    const pathName = process.env.BASE_URL
+    const [submissionMessage, setMessage] = useState('')
+    const [submissionForm, setForm] = useState<FormState>(initialFormState)
+
+    const updateForm = (e:any) => {
+        if(e.target.id == 'title') {
+            setForm({...submissionForm, title: e.target.value})
+        }
+        else if(e.target.id == 'description'){
+            setForm({...submissionForm, description: e.target.value})
+        }
+        else {
+            setForm({...submissionForm, location: e.target.value})
+        }
     }
 
+    const submitTake = async (e: any) =>
+        {
+            e.preventDefault()
+            try {
+                await fetch(`${pathName}/server/submitrecommendations`, {
+                    method: 'POST',
+                    body: JSON.stringify(submissionForm)
+                })
+                .then(response=>{
+                    if(!response.ok){                        
+                        setMessage('Error Submitting Recommendation')
+                        throw new Error('api not returning 200')
+                    }
+                    else {
+                        // maybe this should be an alert instead
+                        // or can we count it down and then erase it
+                        setMessage('Submission Success')
+                        setForm(initialFormState)
+                        // reset the forms 
+                    }
+                })
+                .catch(e => {
+                    setMessage('Error Submitting Recommendation')
+                    throw new Error('error in submitting', e)
+                })
+            }catch (e){
+                setMessage('Error Submitting Recommendation')
+                throw new Error('new submitting hot take')
+            }
+        }
+
+    
     return (
 
         <div id="submission-main-body">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
         <h1>Submit Yours</h1>
-        <p>title</p>
-        <input/>
-        <p>description</p>
-        <textarea/>
-        {/* this should be a placeid from the google api */}
-        <p>location</p>
-        <input value={location} onChange={e=>updateLocation(e)}/>
-        <div id="mapView">
-            <MapView value={location}/>
-        </div>
-        <button>submit</button>
+        {submissionMessage!='' && <span>{submissionMessage}</span>}
+        <form>
+            <p>title</p>
+            <input id="title" value={submissionForm.title} onChange={(e) => updateForm(e)}/>
+            <p>description</p>
+            <textarea id="description" value={submissionForm.description} onChange={(e) => updateForm(e)}/>
+            {/* this should be a placeid from the google api */}
+            <p>location</p>
+            <input id="location" value={submissionForm.location} onChange={(e) => updateForm(e)}/>
+            <div id="mapView">
+                {/* <MapView value={location}/> */}
+            </div>
+            <button onClick={(e)=> {
+                submitTake
+            }}>submit</button>
+        </form>
 
         <style jsx>{`
         #submission-main-body {
