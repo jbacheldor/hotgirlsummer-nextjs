@@ -131,6 +131,7 @@ const Recommendations:React.FC = () => {
                 )
             })}
         </div>
+        <span>Total Results: {data.length}</span>
         <Pagination results={data.length} onChangePage={onChangePage}/>
 
     <style jsx>{`

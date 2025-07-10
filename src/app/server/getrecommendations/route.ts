@@ -8,8 +8,8 @@ export async function GET(){
         const {error, data} = await client
             .from('Activities')
             .select()
+            // .select('*, PreviousActivites!id')
             .order('votes', { ascending: false });
-            // .select('*, PreviousActivites!id');
 
         if(error) {
             throw new Error('data is NOT ok', error)

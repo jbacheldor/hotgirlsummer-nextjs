@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 type Props = {
     results: number;
@@ -8,33 +8,42 @@ type Props = {
 const Pagination:React.FC<Props> = ({results, onChangePage}) => {
     const [pageAmount, setPageAmount] = useState(15)
     const [currentPage, setCurrentPage] = useState(1)
+    const [nextButton, setNextButton] = useState(false)
+    const [prevButton, setPrevButton] = useState(false)
 
     const changePageAmount = (e: any) => {
         setPageAmount(e.target.value)
+        setCurrentPage(1)
     }
 
     const changePage = (e: any) => {
-        if(e.target.value == "prev") {
+        if(e.target.innerHTML == "prev") {
             setCurrentPage(currentPage - 1)
         } else {
             setCurrentPage(currentPage + 1)
         }
     }
 
+    useEffect(()=> {
+        setPrevButton(currentPage > 1 ? false : true)
+        setNextButton((Math.ceil(results/pageAmount) > currentPage) ? false : true)
+    }, [currentPage, pageAmount])
+
     return (
         <div id="pagination">
             <div id="pagination-left">
                 <span>Per Page:{pageAmount}</span>
-                <select>
-                    <option onChange={e=>changePageAmount(e)} disabled={Math.floor(results/15) ? false : true}>15</option>
-                    <option onChange={e=>changePageAmount(e)} disabled={Math.floor(results/30) ? false : true}>30</option>
-                    <option onChange={e=>changePageAmount(e)} disabled={Math.floor(results/50) ? false : true}>50</option>
+                <select onChange={(e)=>changePageAmount(e)}>
+                    <option disabled={Math.floor(results/1) ? false : true}>1</option>
+                    <option disabled={Math.floor(results/2) ? false : true}>2</option>
+                    <option disabled={Math.floor(results/5) ? false : true}>5</option>
+                    <option disabled={Math.floor(results/10) ? false : true}>10</option>
                 </select>
             </div>
             <div id="pagination-right">
-                <button disabled={currentPage > 0 ? true : false} onClick={e=>changePage(e)}>prev</button>
+                <button disabled={prevButton} onClick={e=>changePage(e)}>prev</button>
                 <span>{currentPage}</span>
-                <button disabled={(Math.ceil(results/pageAmount) > currentPage) ? false : true} onClick={e=>changePage(e)}>next</button>
+                <button disabled={nextButton} onClick={e=>changePage(e)}>next</button>
             </div>
 
         <style jsx>
