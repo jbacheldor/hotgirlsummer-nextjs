@@ -4,6 +4,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
+import { emit } from "process";
 
 type FormState = {
     title: string,
@@ -61,7 +62,7 @@ const Submission:React.FC = () => {
                 })
             }catch (e){
                 setMessage('Error Submitting Recommendation')
-                throw new Error('new submitting hot take')
+                throw new Error('new submitting recommendation')
             }
         }
 
@@ -84,7 +85,7 @@ const Submission:React.FC = () => {
                 {/* <MapView value={location}/> */}
             </div>
             <button onClick={(e)=> {
-                submitTake
+                submitTake(e)
             }}>submit</button>
         </form>
 
