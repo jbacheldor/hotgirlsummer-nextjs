@@ -11,6 +11,7 @@ const Recommendations:React.FC = () => {
     let [data, setData] = useState<RecommendationType[]>([])
     let [searchData, setSearchData] = useState<RecommendationType[]>([])
     const [searchError, setSearchError] = useState(false)
+    const [showResults, setShownResults] = useState(0)
 
     const dataSort = (value: string) => {
         switch(value){
@@ -56,6 +57,7 @@ const Recommendations:React.FC = () => {
                 })
                 .then(data => {
                     setData(data.data as RecommendationType[])
+                    setShownResults(data.data.length)
                 })
                 .catch(e => {throw new Error ('womp womp womp, she is broke')})
             }catch(e){
@@ -92,16 +94,32 @@ const Recommendations:React.FC = () => {
         else {
             setSearchError(false)
             setSearchData(queryData)
+            setShownResults(queryData.length)
         }
     }
 
     const resetSearch = () => {
         setSearchData([])
+        setShownResults(data.length)
         setSearchError(false)
     }
 
-    const onChangePage = () => {
-        // change the results distributed 
+    const onPaginationChange = (pageNumber: number, perPageNum: number) => {
+        
+        if(pageNumber == 1){
+            let first = 0
+            let last = perPageNum
+            let newData = data.slice(first, last)
+            setSearchData(newData)
+            setShownResults(newData.length)
+        } else {
+            let first = (perPageNum * pageNumber) - perPageNum
+            let last = (perPageNum * pageNumber)
+            let newData = data.slice(first, last)
+            setSearchData(newData)
+            setShownResults(newData.length)
+        }
+
     }
 
     return (
@@ -123,7 +141,7 @@ const Recommendations:React.FC = () => {
                     </div>
                 )
             })}
-            {searchData.length != 1 && data && data.map((i,key) => {
+            {searchData.length <= 0 && data && data.map((i,key) => {
                 return (
                     <div key={`data-${key}`}>
                         <Rec rec={i}/>
@@ -131,8 +149,8 @@ const Recommendations:React.FC = () => {
                 )
             })}
         </div>
-        <span>Total Results: {data.length}</span>
-        <Pagination results={data.length} onChangePage={onChangePage}/>
+        <span>Total Results: {showResults}</span>
+        <Pagination results={data.length} onPaginationChange={onPaginationChange}/>
 
     <style jsx>{`
         #search-error-message {

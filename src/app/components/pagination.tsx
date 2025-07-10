@@ -2,10 +2,10 @@ import { FormEvent, useEffect, useState } from "react";
 
 type Props = {
     results: number;
-    onChangePage: (e: FormEvent<HTMLOptionElement>) => void;
+    onPaginationChange: (pageNumer: number, perPageNum: number) => void;
 }
 
-const Pagination:React.FC<Props> = ({results, onChangePage}) => {
+const Pagination:React.FC<Props> = ({results, onPaginationChange}) => {
     const [pageAmount, setPageAmount] = useState(15)
     const [currentPage, setCurrentPage] = useState(1)
     const [nextButton, setNextButton] = useState(false)
@@ -14,13 +14,16 @@ const Pagination:React.FC<Props> = ({results, onChangePage}) => {
     const changePageAmount = (e: any) => {
         setPageAmount(e.target.value)
         setCurrentPage(1)
+        onPaginationChange(1, e.target.value)
     }
 
     const changePage = (e: any) => {
         if(e.target.innerHTML == "prev") {
             setCurrentPage(currentPage - 1)
+            onPaginationChange(currentPage - 1, pageAmount)
         } else {
             setCurrentPage(currentPage + 1)
+            onPaginationChange(currentPage + 1, pageAmount)
         }
     }
 
