@@ -1,4 +1,3 @@
-import { RecommendationType } from "@/app/types/recommendations"
 import { createClient } from "../dataStoreClient";
 import { NextResponse } from "next/server";
 

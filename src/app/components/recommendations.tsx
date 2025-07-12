@@ -12,6 +12,7 @@ const Recommendations:React.FC = () => {
     let [searchData, setSearchData] = useState<RecommendationType[]>([])
     const [searchError, setSearchError] = useState(false)
     const [showResults, setShownResults] = useState(0)
+    const [searchString, setSearchString] = useState('')
 
     const dataSort = (value: string) => {
         switch(value){
@@ -78,7 +79,6 @@ const Recommendations:React.FC = () => {
         data.forEach((i)=> {
 
             var regex = new RegExp("(" + value + ")", "i");
-            console.log("regex", regex)
 
             var title = regex.test(i.title)
             var des = regex.test(i.description)
@@ -93,6 +93,7 @@ const Recommendations:React.FC = () => {
         }
         else {
             setSearchError(false)
+            setSearchString(value)
             setSearchData(queryData)
             setShownResults(queryData.length)
         }
@@ -137,7 +138,7 @@ const Recommendations:React.FC = () => {
             {!searchError && searchData && searchData.map((i, key)=> {
                 return (
                     <div key={`search-data-${key}`}>
-                        <Rec rec={i}/>
+                        <Rec rec={i} searchString={searchString}/>
                     </div>
                 )
             })}

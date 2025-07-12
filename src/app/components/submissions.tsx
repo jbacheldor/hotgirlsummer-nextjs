@@ -4,7 +4,6 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
-import { emit } from "process";
 
 type FormState = {
     title: string,
@@ -38,32 +37,38 @@ const Submission:React.FC = () => {
     const submitTake = async (e: any) =>
         {
             e.preventDefault()
-            try {
-                await fetch(`${pathName}/server/submitrecommendations`, {
-                    method: 'POST',
-                    body: JSON.stringify(submissionForm)
-                })
-                .then(response=>{
-                    if(!response.ok){                        
-                        setMessage('Error Submitting Recommendation')
-                        throw new Error('api not returning 200')
-                    }
-                    else {
-                        // maybe this should be an alert instead
-                        // or can we count it down and then erase it
-                        setMessage('Submission Success')
-                        setForm(initialFormState)
-                        // reset the forms 
-                    }
-                })
-                .catch(e => {
-                    setMessage('Error Submitting Recommendation')
-                    throw new Error('error in submitting', e)
-                })
-            }catch (e){
-                setMessage('Error Submitting Recommendation')
-                throw new Error('new submitting recommendation')
+            if(submissionForm.description == '' || submissionForm.title == ''){
+                setMessage('Please check that title and description are filled out.')
             }
+            else {
+                try {
+                    await fetch(`${pathName}/server/submitrecommendations`, {
+                        method: 'POST',
+                        body: JSON.stringify(submissionForm)
+                    })
+                    .then(response=>{
+                        if(!response.ok){                        
+                            setMessage('Error Submitting Recommendation')
+                            throw new Error('api not returning 200')
+                        }
+                        else {
+                            // maybe this should be an alert instead
+                            // or can we count it down and then erase it
+                            setMessage('Submission Success')
+                            setForm(initialFormState)
+                            // reset the forms 
+                        }
+                    })
+                    .catch(e => {
+                        setMessage('Error Submitting Recommendation')
+                        throw new Error('error in submitting', e)
+                    })
+                }catch (e){
+                    setMessage('Error Submitting Recommendation')
+                    throw new Error('new submitting recommendation')
+                }
+            }
+            
         }
 
     
@@ -72,11 +77,11 @@ const Submission:React.FC = () => {
         <div id="submission-main-body">
         <img id="zest" src="/bullet_point.svg" height="50px"/>
         <h1>Submit Yours</h1>
-        {submissionMessage!='' && <span>{submissionMessage}</span>}
+        {submissionMessage!='' && <span id="message">{submissionMessage}</span>}
         <form>
-            <p>title</p>
+            <p >title *</p>
             <input id="title" value={submissionForm.title} onChange={(e) => updateForm(e)}/>
-            <p>description</p>
+            <p>description *</p>
             <textarea id="description" value={submissionForm.description} onChange={(e) => updateForm(e)}/>
             {/* this should be a placeid from the google api */}
             <p>location</p>
@@ -90,12 +95,17 @@ const Submission:React.FC = () => {
         </form>
 
         <style jsx>{`
+        #message {
+            font-weight: 200;
+            color: white;
+        }
         #submission-main-body {
             position: relative;
             background-color: #97A98B;
             margin: 10px;
             padding: 10px;
             border-radius: 10px;
+            max-width: 30%;
             box-shadow:
             0 0 30px 10px #fff,  /* inner white */
             0 0 50px 20px #f0f, /* middle magenta */
