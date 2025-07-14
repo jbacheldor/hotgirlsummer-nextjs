@@ -14,18 +14,19 @@ const Activity:React.FC<Props> = ({slug}) => {
     const getData = async () => {
     try{
         console.log('womp womp')
-        // await fetch(`${pathName}/server/getActivity/` + new URLSearchParams({
-        //     id: slug,
-        //     }).toString(), {
-        //         method: 'GET',
-        //     })
-        //     .then((data)=>{
-        //         // this is bad, but i need to leave my house, so i'm going to push it anyways
-        //         setActivityData(data.json as any as prevActivityType);
-                    // setIsLoading(false)
-        //     }).catch(e=> {
-        //         throw new Error('error during call', e)
-        //     })
+        await fetch(`${pathName}/server/getactivity?` + new URLSearchParams({
+            id: slug,
+            }).toString(), {
+                method: 'GET',
+            })
+            .then((response) => {return response.json()})
+            .then((data)=>{
+                // this is bad, but i need to leave my house, so i'm going to push it anyways
+                setActivityData(data.data as any as prevActivityType);
+                    setIsLoading(false)
+            }).catch(e=> {
+                throw new Error('error during call', e)
+            })
     }catch(e){
         throw new Error('can not return previous activity')
     }
