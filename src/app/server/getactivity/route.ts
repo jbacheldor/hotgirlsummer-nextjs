@@ -7,7 +7,10 @@ export async function GET(request: NextRequest){
         const client = await createClient();
         const {error, data} = await client
             .from('PreviousActivities')
-            .select()
+            .select(`
+                *,
+                Activities(*)
+                `)
             .eq('id', id)
         if(error){
             throw new Error('bad and wicked things occuring in this request')

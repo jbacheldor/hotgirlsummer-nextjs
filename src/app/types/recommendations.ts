@@ -10,12 +10,14 @@ export type RecommendationsType = {
     recommendations: RecommendationType[]
 }
 
-export interface prevActivityType extends RecommendationType {
+export interface prevActivityType {
     review: string,
-    reviewNumber: number,
-    date: Date,
+    rating: number,
+    date: string,
     week: number,
     year: number,
+    picture?: string,
+    Activities: RecommendationType;
 }
 
 
