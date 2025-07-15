@@ -1,6 +1,8 @@
 'use client'
 import { prevActivityType } from "@/app/types/recommendations"
 import { useEffect, useState } from "react"
+import Rating from "./rating"
+import Link from "next/link"
 
 type Props = {
     slug: string
@@ -95,8 +97,7 @@ const Activity:React.FC<Props> = ({slug}) => {
                     <div id="activity-review">
                         <h3>Review:</h3>
                         <span>{activityData.review}</span>
-                        <h3>Rating:{activityData.rating}</h3>
-                        <img src={'/star-light.svg'} height={'30px'}/>
+                        <Rating rating={activityData.rating}/>
                         {/* put in stars here to represent the rating of the activity */}
                     </div>
                     <div id="activity-pic">
@@ -113,7 +114,7 @@ const Activity:React.FC<Props> = ({slug}) => {
             <div id='footer'>
                 {/* have to figure out how to get the next closest date???? */}
                 <button>previous</button>
-                <button>home</button>
+                <button><Link href="/recommendation">home</Link></button>
                 <button>next</button>
             </div>
             <style jsx>
