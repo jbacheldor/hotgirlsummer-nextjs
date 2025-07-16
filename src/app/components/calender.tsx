@@ -2,24 +2,25 @@
 import DateCircles from "./datecircles";
 
 type Props = {
-    month: number;
-    year: number;
+    month: string;
+    year: string;
 }
 
 const CalendarBody: React.FC<Props> = ({month, year}) => {
-    var months = [ "January", "February", "March", "April", "May", "June", 
-            "July", "August", "September", "October", "November", "December" ];
+    var months = [ "january", "february", "march", "april", "may", "june", 
+            "july", "august", "september", "october", "november", "december" ];
+    let index = months.indexOf(month)
 
     var weeks = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     return (
             <div id="calendar-body">
                 <div id="month-nav">
-                    <h2>* {months[month - 1]} {year} *</h2>
+                    <h2>* {months[index]} {year} *</h2>
                 </div>
                 <div id='circles-wrapper'>
                     <div id="calendar-circles">
-                        {[...Array(weeks[month - 1])].map((i, index)=>
+                        {[...Array(weeks[index])].map((i, index)=>
                             <DateCircles {...{'day': index+1, 'event': true, 'id': '1234'}}/>
                         )}
                     </div>

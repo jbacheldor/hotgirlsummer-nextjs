@@ -1,13 +1,14 @@
-hr {
+.pagetitle {
     border: 2px solid #b7caab;
     border-radius: 10px;
     margin: 10px 0;
+    text-align: center;
 }
 #title-section {
     text-align: center;
     margin-top: 10px;
 }
-#calendar-page {
+.calendarpage {
     display: flex;
     align-items: center;
     align-self: center;
