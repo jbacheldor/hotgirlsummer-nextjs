@@ -14,6 +14,8 @@ const Activity:React.FC<Props> = ({slug}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [date, setDate] = useState<any[]>()
 
+    let today = new Date(Date.now());
+
     // makes date title legible
     const parseDate = (date: string) => {
         const split_date:any[] = date.split('-')
@@ -109,14 +111,13 @@ const Activity:React.FC<Props> = ({slug}) => {
                 </div>
             </div>
             }
-            non-loading part: {slug}
 
             <div id='footer'>
                 {/* have to figure out how to get the next closest date???? */}
                 <button>previous</button>
                 <div>
                     <Link href="/recommendation"><button>home</button></Link>
-                    <Link href="/calendar"><button>calendar</button></Link>
+                    <Link href={`/calendar/${today.getMonth()}/${today.getFullYear()}`}><button>calendar</button></Link>
                 </div>
                 <button>next</button>
             </div>

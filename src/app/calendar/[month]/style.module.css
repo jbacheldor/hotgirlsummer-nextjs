@@ -1,10 +1,8 @@
 .pagetitle {
-    border: 2px solid #b7caab;
-    border-radius: 10px;
     margin: 10px 0;
     text-align: center;
 }
-#title-section {
+.titlesection {
     text-align: center;
     margin-top: 10px;
 }
@@ -14,7 +12,7 @@
     align-self: center;
     flex-direction: column;
 }
-#footer-section {
+.footersection {
     position: absolute;
     bottom: 10px;
 }

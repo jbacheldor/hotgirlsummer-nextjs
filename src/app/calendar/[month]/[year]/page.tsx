@@ -8,22 +8,19 @@ type UrlStuff = {params: Promise<{
     month: string,
 }>}
 
-
 const Trial:React.FC<UrlStuff> = async ({params}) => {
      const {year, month} = await params
 
-     console.log('slug', month)
-     console.log('slugggg', year)
     return (
-        <div id={styles.calendarpage}>
-            <div id="title-section">
-                <h1 id={styles.pagetitle}>Calendar</h1>
+        <div className={styles.calendarpage}>
+            <div id="title-section" className={styles.titlesection}>
+                <h1 className={styles.pagetitle}>Calendar</h1>
                 <hr/>
             </div>
             <CalendarBody month={month} year={year}/>
             <Stats/>
 
-            <div id='footer-section'>
+            <div className={styles.footersection}>
                 <Link href="/recommendation"><button>Recommendations</button></Link>
             </div>
         </div>

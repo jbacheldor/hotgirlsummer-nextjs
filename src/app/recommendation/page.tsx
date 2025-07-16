@@ -6,6 +6,7 @@ import Submissions from "../components/submissions"
 
 const Page:React.FC = () => {
     // const router = useRouter()
+    let today = new Date(Date.now());
 
     return (
         <div id="rec-body-main">
@@ -15,7 +16,7 @@ const Page:React.FC = () => {
             <Recommendations/>
             <Submissions/>
             </div>
-            <Link href="/calendar"><button>View Previous Weeks!</button></Link>
+            <Link href={`/calendar/${today.getMonth()}/${today.getFullYear()}`}><button>View Previous Weeks!</button></Link>
 
         <style jsx>{`
         

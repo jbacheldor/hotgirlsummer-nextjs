@@ -10,7 +10,6 @@ type UrlStuff = {params: Promise<{
 const Calendar:React.FC<UrlStuff> = async ({params}) => {
     const {month} = await params
     let today = new Date(Date.now());
-    let year = today.getFullYear();
 
     return (
         <p></p>

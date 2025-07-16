@@ -2,25 +2,31 @@
 import DateCircles from "./datecircles";
 
 type Props = {
-    month: string;
+    month: number;
     year: string;
 }
 
 const CalendarBody: React.FC<Props> = ({month, year}) => {
     var months = [ "january", "february", "march", "april", "may", "june", 
             "july", "august", "september", "october", "november", "december" ];
-    let index = months.indexOf(month)
+    // let index = months.indexOf(month)
+    
 
     var weeks = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    var weekDays = ['S', 'M', 'T', 'W', 'Th', 'F', 'S']
 
     return (
             <div id="calendar-body">
                 <div id="month-nav">
-                    <h2>* {months[index]} {year} *</h2>
+                    <h2>* {months[month-1]} {year} *</h2>
                 </div>
                 <div id='circles-wrapper'>
+                    <div id="weekdays">
+                        {weekDays.map((i, index)=> <span key={index}>{i}</span>)}
+                        </div>
                     <div id="calendar-circles">
-                        {[...Array(weeks[index])].map((i, index)=>
+                        {[...Array(weeks[month-1])].map((i, index)=>
                             <DateCircles {...{'day': index+1, 'event': true, 'id': '1234'}}/>
                         )}
                     </div>
@@ -32,10 +38,22 @@ const CalendarBody: React.FC<Props> = ({month, year}) => {
 
                 <style jsx>
                     {`
-                     #circles-wrapper {
+                    #weekdays {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    #weekdays span {
+                        margin: 10px 22px;
+                    }
+                    #circles-wrapper {
                         width: 100%;
                         display: flex;
                         justify-content: center;
+                        align-items: center;
+                        border: 1px solid white;
+                        border-radius: 5px;
+                        flex-direction: column;
                     }
                     #month-nav h2{
                         width: 100%;
@@ -67,9 +85,7 @@ const CalendarBody: React.FC<Props> = ({month, year}) => {
                         flex-flow: row wrap;
                         align-items: center;
                         justify-content: center;
-                        border: 1px solid white;
-                        border-radius: 5px;
-                        width: 65%;
+                        width: 385px;
                     }
                     `}
                 </style>
