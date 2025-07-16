@@ -5,7 +5,7 @@ const Calendar: React.FC = () => {
 
     return (
         <div>
-            <button><Link href="/recommendation">Recommendations</Link></button>
+            <Link href="/recommendation"><button>Recommendations</button></Link>
             <div>
                 calendar here
             </div>

@@ -15,8 +15,7 @@ const Page:React.FC = () => {
             <Recommendations/>
             <Submissions/>
             </div>
-            <button><Link href="/calendar">View Previous Weeks!</Link>
-                </button>
+            <Link href="/calendar"><button>View Previous Weeks!</button></Link>
 
         <style jsx>{`
         

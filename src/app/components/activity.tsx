@@ -114,7 +114,7 @@ const Activity:React.FC<Props> = ({slug}) => {
             <div id='footer'>
                 {/* have to figure out how to get the next closest date???? */}
                 <button>previous</button>
-                <button><Link href="/recommendation">home</Link></button>
+                <Link href="/recommendation"><button>home</button></Link>
                 <button>next</button>
             </div>
             <style jsx>
