@@ -34,7 +34,7 @@ const DateCircles: React.FC<Props> = (props: Props) => {
                     align-items: center;
                 }
                 .true {
-                    background-color: #A7D073;
+                    background-color: #b7caab;
                     color: black;
                 }
                 .false {

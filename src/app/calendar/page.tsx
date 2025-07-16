@@ -5,6 +5,7 @@ import DateCircles from "./datecircles";
 const Calendar: React.FC = () => {
     let today = new Date(Date.now());
     let month = today.getMonth();
+    let year = today.getFullYear();
 
     var months = [ "January", "February", "March", "April", "May", "June", 
             "July", "August", "September", "October", "November", "December" ];
@@ -16,16 +17,22 @@ const Calendar: React.FC = () => {
             <div id="title-section">
                 <h1>Calendar</h1>
                 <hr/>
-                <div id="month-nav">
-                    <button>prev</button>
-                    <h2>{months[month - 1]}</h2>
-                    <button>next</button>
-                </div>
             </div>
             <div id="calendar-body">
-                {[...Array(weeks[month - 1])].map((i, index)=>
-                    <DateCircles {...{'day': index+1, 'event': true, 'id': '1234'}}/>
-                )}
+                <div id="month-nav">
+                    <h2>* {months[month - 1]} {year} *</h2>
+                </div>
+                <div id='circles-wrapper'>
+                    <div id="calendar-circles">
+                        {[...Array(weeks[month - 1])].map((i, index)=>
+                            <DateCircles {...{'day': index+1, 'event': true, 'id': '1234'}}/>
+                        )}
+                    </div>
+                </div>
+                <div id="month-nav">
+                    <button>prev</button>
+                    <button>next</button>
+                </div>
             </div>
             <div id='calendar-stats'>
                 <h3>Monthly Review Stats!!</h3>
@@ -47,7 +54,7 @@ const Calendar: React.FC = () => {
             <style jsx>
                 {`
                     hr {
-                        border: 2px solid white;
+                        border: 2px solid #b7caab;
                         border-radius: 10px;
                         margin: 10px 0;
                     }
@@ -61,24 +68,44 @@ const Calendar: React.FC = () => {
                         align-self: center;
                         flex-direction: column;
                     }
+                    #circles-wrapper {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                    }
+                    #month-nav h2{
+                        width: 100%;
+                        text-align: center;
+                    }
                     #month-nav{
                         display: flex;
                         flex-direction: row;
+                        justify-content: space-between;
+                        // border: 1px solid white;
+                        padding: 10px 0px;
+                        background-color: #b7caab;
+                        border-radius: 10px;
+                        margin: 10px;
                     }
                     #month-nav button {
                         margin: 0 20px;
                     }
                     #calendar-body {
-                        display: flex;
-                        flex-flow: row wrap;
-                        align-items: center;
-                        justify-content: center;
                         width: 60%;
                         background-color: #97a98b;
                         border: 2px solid white;
                         border-radius: 5px;
                         padding: 10px;
                         margin-top: 10px;
+                    }
+                    #calendar-circles {
+                        display: flex;
+                        flex-flow: row wrap;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid white;
+                        border-radius: 5px;
+                        width: 65%;
                     }
                     #footer-section {
                         position: absolute;
