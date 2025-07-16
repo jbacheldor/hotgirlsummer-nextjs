@@ -39,8 +39,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 To-do:
 - make calendar page 
-- identify slugs
 - abort signal
 - figure out how to only show activities that aren't in previous activites
 - figure out how to cache views locally
 - pagination 
+- zustand state 
+- 
