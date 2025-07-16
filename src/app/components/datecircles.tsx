@@ -1,4 +1,4 @@
-
+'use client'
 type Props = {
     day: number;
     event: boolean;
@@ -7,9 +7,6 @@ type Props = {
 
 const DateCircles: React.FC<Props> = (props: Props) => {
     const {day, event, id} = props
-    console.log(props)
-
-    console.log('day', day)
 
     return (
         <div className={`circumference ${event}`}>

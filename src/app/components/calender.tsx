@@ -1,23 +1,18 @@
 'use client'
-import Link from "next/link"
 import DateCircles from "./datecircles";
 
-const Calendar: React.FC = () => {
-    let today = new Date(Date.now());
-    let month = today.getMonth();
-    let year = today.getFullYear();
+type Props = {
+    month: number;
+    year: number;
+}
 
+const CalendarBody: React.FC<Props> = ({month, year}) => {
     var months = [ "January", "February", "March", "April", "May", "June", 
             "July", "August", "September", "October", "November", "December" ];
 
     var weeks = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     return (
-        <div id="calendar-page">
-            <div id="title-section">
-                <h1>Calendar</h1>
-                <hr/>
-            </div>
             <div id="calendar-body">
                 <div id="month-nav">
                     <h2>* {months[month - 1]} {year} *</h2>
@@ -33,42 +28,10 @@ const Calendar: React.FC = () => {
                     <button>prev</button>
                     <button>next</button>
                 </div>
-            </div>
-            <div id='calendar-stats'>
-                <h3>Monthly Review Stats!!</h3>
-                <p>
-                    num of events
-                </p>
-                <p>
-                    locations!
-                </p>
-                <p>
-                    avg review!
-                </p>
-            </div>
 
-            <div id='footer-section'>
-                <Link href="/recommendation"><button>Recommendations</button></Link>
-            </div>
-
-            <style jsx>
-                {`
-                    hr {
-                        border: 2px solid #b7caab;
-                        border-radius: 10px;
-                        margin: 10px 0;
-                    }
-                    #title-section {
-                        text-align: center;
-                        margin-top: 10px;
-                    }
-                    #calendar-page {
-                        display: flex;
-                        align-items: center;
-                        align-self: center;
-                        flex-direction: column;
-                    }
-                    #circles-wrapper {
+                <style jsx>
+                    {`
+                     #circles-wrapper {
                         width: 100%;
                         display: flex;
                         justify-content: center;
@@ -107,21 +70,10 @@ const Calendar: React.FC = () => {
                         border-radius: 5px;
                         width: 65%;
                     }
-                    #footer-section {
-                        position: absolute;
-                        bottom: 10px;
-                    }
-                    #calendar-stats {
-                        background-color: #97a98b;
-                        border: 2px solid white;
-                        border-radius: 5px;
-                        margin: 10px;
-                        padding: 10px;
-                    }
-                `}
-            </style>
-        </div>
+                    `}
+                </style>
+            </div>
     )
 }
 
-export default Calendar
+export default CalendarBody;
