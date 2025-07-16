@@ -6,7 +6,7 @@ type Props = {
 }
 
 const MapView:React.FC<Props> = ({value}) => {
-    console.log('value yaaa', value)
+
 
     return(
         <APIProvider region='us' apiKey={''} onLoad={() => console.log('Maps API has loaded.')}>

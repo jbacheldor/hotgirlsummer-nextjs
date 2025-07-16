@@ -1,21 +1,32 @@
 import { useState } from "react"
 
-const Filter:React.FC = () => {
+type Props = {
+    dataSort: (value: string) => void
+}
+
+const Filter:React.FC<Props> = (Props) => {
+    const {dataSort} = Props
+
     const [voteSort, setVoteSort] = useState('false')
     const [dateSort, setDateSort] = useState('false')
 
     const reset = () => {
         setVoteSort('false')
         setDateSort('false')
+
+        // resets back to original value
+        dataSort('votes_desc')
     }
 
     // need to send a lil query here y'allll
     const sortByVotes = () => {
         if(voteSort == 'asc'){
             setVoteSort('desc')
+            dataSort('votes_desc')
         }
         else {
             setVoteSort('asc')
+            dataSort('votes_asc')
         }
         setDateSort('false')
     }
@@ -23,15 +34,16 @@ const Filter:React.FC = () => {
     const sortByDate = () => {
         if(dateSort == 'asc'){
             setDateSort('desc')
+            dataSort('dates_desc')
         }
         else {
             setDateSort('asc')
+            dataSort('dates_asc')
         }
         setVoteSort('false')
     }
 
     return (
-        <div>
             <div id="filter-box">
                 Sort By:
                 <button onClick={sortByVotes}>
@@ -47,7 +59,6 @@ const Filter:React.FC = () => {
                 <button onClick={reset}>
                     Reset
                 </button>
-            </div>
             <style jsx>{`
             #filter-box{
                 background: #B7CAAB;
@@ -56,6 +67,7 @@ const Filter:React.FC = () => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                margin-bottom: 10px;
             }
 
             #filter-box button {

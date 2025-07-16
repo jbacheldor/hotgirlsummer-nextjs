@@ -1,24 +1,26 @@
 import { useState } from "react"
 
+type Props = {
+    resetQuery: () => void;
+    queryData: (value: string) => void
+}
 
-const SearchBox:React.FC = () => {
+
+const SearchBox:React.FC<Props> = ({resetQuery, queryData}) => {
     const [searchString, setSearchString] = useState('')
 
     const updateSearchString = (e: any) => {
         setSearchString(e.target.value)
     }
-    
-
-    // on this we can do client search or regex or whatever 
-    const searchQuery = () => {
-        // do we need to search just title, or description, or all values
-        console.log(searchString)
-    }
 
     return (
         <div id="search-box">
             <input placeholder="Search Here" value={searchString} onChange={(e)=> {updateSearchString(e)}}/>
-            <button onClick={searchQuery}>Search</button>
+            <button onClick={() => queryData(searchString)}>Search</button>
+            <button onClick={()=> {
+                resetQuery()
+                setSearchString('')
+            }}>Clear</button>
 
             <style jsx>{`
             #search-box {
