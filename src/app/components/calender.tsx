@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import DateCircles from "./datecircles";
 
 type Props = {
@@ -30,6 +31,19 @@ const CalendarBody: React.FC<Props> = ({month, year}) => {
     // also we only want to show months w/ data 
     if(today.getFullYear() <= year_num) prev = true
     
+    const prevPage = () => {
+        if(month_num == 1) return `/calendar/12/${year_num-1}`
+        
+        return `/calendar/${month_num-1}/${year_num}`
+    }
+
+    const nextPage = () => {
+        if(month_num == 12){
+            return `/calendar/1/${year_num}`
+        }
+        return `/calendar/${month_num+1}/${year_num}`
+    }
+
 
     var weeks = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -51,8 +65,8 @@ const CalendarBody: React.FC<Props> = ({month, year}) => {
                     </div>
                 </div>
                 <div id="month-nav">
-                    <button disabled={!prev}>prev</button>
-                    <button disabled={!next}>next</button>
+                    <Link aria-disabled={!prev} href={prevPage()}><button disabled={!prev}>prev</button></Link>
+                    <Link aria-disabled={!next}  href={nextPage()}><button disabled={!next}>next</button></Link>
                 </div>
 
                 <style jsx>
@@ -104,6 +118,9 @@ const CalendarBody: React.FC<Props> = ({month, year}) => {
                         width: 400px;
                         border: 1px solid white;
                         border-radius: 5px;
+                    }
+                    button:disabled {
+                        cursor: not-allowed;
                     }
                     `}
                 </style>
